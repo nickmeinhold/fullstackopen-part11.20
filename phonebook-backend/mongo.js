@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 if (process.argv.length < 3) {
-  console.log('we need a password');
+  console.log("we need a password");
   process.exit(1);
 }
 
@@ -9,7 +9,7 @@ const password = process.argv[2];
 
 const url = `mongodb+srv://nickmeinhold_db_user:${password}@fullstackopen.iltu0oz.mongodb.net/personApp?retryWrites=true&w=majority&appName=Cluster0`;
 
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 
 const personSchema = new mongoose.Schema({
   id: Number,
@@ -17,9 +17,9 @@ const personSchema = new mongoose.Schema({
   number: String,
 });
 
-const Person = mongoose.model('Person', personSchema);
+const Person = mongoose.model("Person", personSchema);
 
-if (process.argv.length === 3) {
+if (process.argv.length == 3) {
   mongoose.connect(url);
   Person.find({}).then((result) => {
     result.forEach((note) => {
@@ -39,8 +39,8 @@ const person = new Person({
   number: process.argv[4],
 });
 
-person.save().then(() => {
-  console.log('person saved!');
+person.save().then((result) => {
+  console.log("person saved!");
   mongoose.connection.close();
 });
 
